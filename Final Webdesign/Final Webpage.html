@@ -1,0 +1,505 @@
+<!--
+Yegor Shea
+HTML TO XML V1
+Local Hospital Included
+Local Police Included
+-->
+
+<!DOCTYPE html>
+    <html>
+    <head>
+
+        <title>School Application Form</title>
+
+        <script type="text/javascript" language="javascript">
+
+    	var xmlDoc = new ActiveXObject("Microsoft.XMLDOM");
+        	var fso = new ActiveXObject("Scripting.FileSystemObject");	
+        	var FILENAME= 'school_application_form.xml';
+			
+
+
+    function SaveXMLData()
+    {
+     	validations();
+    }
+
+
+    function createfile()
+    {
+
+    	var file;
+			
+			//Personal Information
+        	var e1=document.getElementById('SchoolName').value;
+        	var p1=document.getElementById('ContactNumber').value;
+        	var em1=document.getElementById('ContactEmail').value;
+        	var d1=document.getElementById('TodaysDate').value;
+
+        	var tablemain = document.getElementById('tblmain');
+			
+			
+			// Local Hospital Information 
+			var lhn=document.getElementById('LHName').value;
+        	var lhpn=document.getElementById('LHPhoneNumber').value;
+        	var lha=document.getElementById('LHAddres').value;
+        	var lhd=document.getElementById('LHDesciription').value;
+			
+			
+			// Local Police Information 
+			var lpn=document.getElementById('LPName').value;
+        	var lppn=document.getElementById('LPPhoneNumber').value;
+        	var lpa=document.getElementById('LHAddres').value;
+        	var lpd=document.getElementById('LHDesciription').value;
+			
+			// On Campus Information 
+			var ocname=document.getElementById('OCName').value;
+        	var ocphonenumber=document.getElementById('OCPhoneNumber').value;
+        	var ocaddres=document.getElementById('OCAddres').value;
+        	var ocdesc=document.getElementById('OCDesciription').value;
+			
+			//Local Counseling Information 
+			var lcname=document.getElementById('LCName').value;
+        	var lcphone=document.getElementById('LCPhoneNumber').value;
+        	var lcaddress=document.getElementById('LCAddres').value;
+        	var lcdescript=document.getElementById('LCDesciription').value;
+			
+
+    	if(fso.fileExists(FILENAME))
+        	{
+    		xmlDoc.load(FILENAME);
+        		var lng;
+        		lng=xmlDoc.getElementsByTagName("Details");
+
+        		var xmlread= fso.OpenTextFile(FILENAME,1,true,0);
+
+        		var x=xmlread.readAll();
+        		var replace=x.replace('</End>','');
+        		var sno=lng.length + 1;
+				
+				//XML Formatting 
+        		file=fso.OpenTextFile(FILENAME,2,true);
+				file.writeLine(replace);
+        		file.WriteLine('<Details category="'+sno+'">');
+        		file.WriteLine('<SNo>'+sno+'</SNo>');
+				
+				//Personal XML Data
+        		file.WriteLine('<Name>'+e1+'</Name>');
+        		file.WriteLine('<PhoneNumber>'+p1+'</PhoneNumber>');
+        		file.WriteLine('<Emailid>'+em1+'</Emailid>');
+        		file.WriteLine('<Date>'+d1+'</Date>');
+				
+				
+				//Local Hospital XML Data
+				file.WriteLine('<LHN>'+lhn+'</LHN>');
+        		file.WriteLine('<LHPN>'+lhpn+'</LHPN>');
+        		file.WriteLine('<LHA>'+lha+'</LHA>');
+        		file.WriteLine('<LHD>'+lhd+'</LHD>');
+				
+				
+				//Local Police XML Data
+				file.WriteLine('<LPN>'+lpn+'</LPN>');
+        		file.WriteLine('<LPPN>'+lppn+'</LPPN>');
+        		file.WriteLine('<LPA>'+lpa+'</LPA>');
+        		file.WriteLine('<LPD>'+lpd+'</LPD>');
+				
+				//On Campus XML Data
+				file.WriteLine('<OCN>'+ocname+'</OCN>');
+        		file.WriteLine('<OCPN>'+ocphonenumber+'</OCPN>');
+        		file.WriteLine('<OCA>'+ocaddres+'</OCA>');
+        		file.WriteLine('<OCD>'+ocdesc+'</OCD>');
+				
+				//Local Counseling XML Data
+				file.WriteLine('<LCN>'+lcname+'</LCN>');
+        		file.WriteLine('<LCPN>'+lcphone+'</LCPN>');
+        		file.WriteLine('<OCA>'+lcaddress+'</LCA>');
+        		file.WriteLine('<LCD>'+lcdescript+'</LCD>');					
+				
+        		file.WriteLine('</Details>');
+        		file.WriteLine('</End>');
+        		
+    		alert('Existing File was Updated');
+        	}
+        	else
+        	{
+				//XML Formating 
+        		file= fso.CreateTextFile(FILENAME, true);
+        		file.WriteLine('<?xml version="1.0" encoding="utf-8" ?>');
+				file.WriteLine('<?xml-stylesheet type="text/xsl" href="cdcatalog.xsl"?>');
+				file.WriteLine('<End>');
+        		file.WriteLine('<Details category="1">');
+        		file.WriteLine('<SNo>'+1+'</SNo>');
+				
+				//Personal XML Data
+        		file.WriteLine('<Name>'+e1+'</Name>');
+        		file.WriteLine('<PhoneNumber>'+p1+'</PhoneNumber>');
+        		file.WriteLine('<Emailid>'+em1+'</Emailid>');
+        		file.WriteLine('<Date>'+d1+'</Date>');
+				
+				
+				//Local Hospital XML Data
+				file.WriteLine('<LHN>'+lhn+'</LHN>');
+        		file.WriteLine('<LHPN>'+lhpn+'</LHPN>');
+        		file.WriteLine('<LHA>'+lha+'</LHA>');
+        		file.WriteLine('<LHD>'+lhd+'</LHD>');
+				
+				
+				//Local Police XML Data
+				file.WriteLine('<LPN>'+lpn+'</LPN>');
+        		file.WriteLine('<LPPN>'+lppn+'</LPPN>');
+        		file.WriteLine('<LPA>'+lpa+'</LPA>');
+        		file.WriteLine('<LPD>'+lpd+'</LPD>');
+				
+				//On Campus XML Data
+				file.WriteLine('<OCN>'+ocname+'</OCN>');
+        		file.WriteLine('<OCPN>'+ocphonenumber+'</OCPN>');
+        		file.WriteLine('<OCA>'+ocaddres+'</OCA>');
+        		file.WriteLine('<OCD>'+ocdesc+'</OCD>');
+				
+				//Local Counseling XML Data
+				file.WriteLine('<LCN>'+lcname+'</LCN>');
+        		file.WriteLine('<LCPN>'+lcphone+'</LCPN>');
+        		file.WriteLine('<OCA>'+lcaddress+'</LCA>');
+        		file.WriteLine('<LCD>'+lcdescript+'</LCD>');			
+				
+				
+        		file.WriteLine('</Details>');
+        		file.WriteLine('</End>');     
+
+    		alert('File Created');
+        	}
+
+    	/*
+		<!-- displayData();--> This can be used when finished with form
+
+    	document.getElementById('SchoolName').value='';
+    	document.getElementById('ContactNumber').value='';
+    	document.getElementById('ContactEmail').value='';
+    	document.getElementById('TodaysDate').value='';
+
+		*/
+		
+    	file.close();
+    }
+
+    //Validations for inputs     
+    function validations() 
+    {
+    	var emp1=document.getElementById('SchoolName').value; 
+            var letters = /^[\s A-Za-z]+$/; 
+            if(emp1!="")
+            {
+            	if(emp1.match(letters)) 
+              	{
+    	    		allnumeric();
+              	}
+              	else 
+    	        {
+              		alert('Please input alphabet characters only'); 
+              		return false; 
+              	}
+            }
+    	else
+    	{
+    	  	alert('Please Enter Name.');
+     	}
+    }
+
+            
+    <!--Email Validation-->
+
+    function checkemail()
+    {
+    	var email = document.getElementById('ContactEmail');
+            var filter = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+
+    	if(email.value!="")
+    	{
+            	if (!filter.test(email.value)) 
+    		{
+            		alert('Please provide a valid email address');
+            		return false;
+            	}
+                    else
+                    {
+                    	DateValidation();
+                    }
+           	}     
+    	else
+    	{
+    		alert('Please Enter Email.');
+    	}
+    }
+
+
+    <!--Date Validation-->
+
+    function DateValidation()
+    {
+        	var date=/^(0?[1-9]|[12][0-9]|3[01])[\/\-](0?[1-9]|1[012])[\/\-]\d{2,4}$/;
+        	var TodaysDate=document.getElementById("TodaysDate");
+
+    	if(TodaysDate.value!="")
+          	{
+    	    	if(TodaysDate.value.match(date))
+    	    	{
+    	    		createfile();
+    	    	}
+    	    	else
+    		{
+        	     		alert("Please provide valid date : DD-MM-YY(YYYY)");
+    			return(false);
+    	    	}
+          	}
+    	else
+    	{
+    		alert('Please Enter Date.');
+    	}
+    }
+
+
+    <!--P-->
+
+    function allnumeric() 
+    {
+    	var numbers=/^\d{10}$/;
+        	var ContactNumber=document.getElementById("ContactNumber");
+			var LHContactNumber=document.getElementById("LHPhoneNumber");
+    	if(ContactNumber.value!="")
+    	{
+    		if(ContactNumber.value.length=="10")
+    		{
+        			if(ContactNumber.value.match(numbers) && LHContactNumber.value.match(numbers))
+        			{
+           				checkemail();
+        			}
+        			else
+    			{
+    	    			alert("Phone number should be numeric");
+        				return(false);
+    			}
+    		}
+    		else
+    		{
+    			alert('Phone Number should be like: 9876543210');
+    		}
+    	}
+    	else
+    	{
+    		alert('Please Enter Phone Number.');
+    	}
+    }
+
+
+        </script>
+    </head>
+
+    <body>
+	<form id="empForm" action="" method="get">
+	
+	<p align="Left"> Sponsored by: <img src="UMD_Logo.jpg"  width="300" height="60" /> </p>
+	<p align="center"><b> <font size=6> Welcome to the Sexual Prevention and Violence </font></b></p>
+        	<p align="center"><b><font size=6> School Application Form </font></b></p>
+
+
+			
+	<p><font size = 5>
+	Personal Information:
+	</p></font>
+
+	<!-- Personal Information -->
+				
+        			<td>School Name:</td>
+        			<td><input type="text" id="SchoolName" maxlength="25"/></td>
+
+        			<td>Contact Phone Number:</td>
+        			<td><input type="text" id="ContactNumber" maxlength="10"/></td>
+
+        			<td>Conact Email:</td>
+        			<td><input type="text" id="ContactEmail"/></td>
+					
+        			<td>Todays Date:</td>
+        			<td><input type="text" id="TodaysDate" maxlength="10"/></td><br>
+					
+					<!-- <br><br><button onclick="myFunction()">Add Another</button> -->   <!-- "Add Another" Button, needs to be connected to json -->
+	
+	<hr noshade>
+	<p><font size = 5>
+	Hopital Information:
+	</p></font>
+
+	<!-- Local Hospital Information -->
+				
+
+        			<td>Local Hospital Name:</td>
+        			<td><input type="text" id="LHName" maxlength="30"/></td>
+
+        			<td>Local Hospital Emergency Number:</td>
+        			<td><input type="text" id="LHPhoneNumber" maxlength="10"/></td>
+					
+					<td>Local Hospital General Number:</td>
+        			<td><input type="text" id="LHGPhoneNumber" maxlength="10"/></td>
+
+        			<td>Local Hospital Full Adrdress:</td>
+        			<td><input type="text" id="LHAddres" maxlength="40"/></td><br><br>
+
+        			<td>Local Hospital Description:</td>
+        			<td><input type="text" id="LHDesciription" maxlength="10"/></td><br>
+					
+					
+					<!-- Check Box information, This can be used later in development -->
+					<!--
+					<input type="checkbox" name="Box1" value="SANE"> Sexaual Assult Nurse Examiners
+					<input type="checkbox" name="Box2" value="Hopital"> This is a great hospital
+					<input type="checkbox" name="Box3" value="GreatNurses"> This hospital has great nurses
+					<input type="checkbox" name="Box4" value="OH"> This hospital is open 24/7
+					-->
+					
+					
+					<!-- <br><br><button onclick="myFunction()">Add Another</button> -->   <!-- "Add Another" Button, needs to be connected to json -->
+
+	
+	<hr noshade>
+	<p><font size = 5>
+	Police Information:
+	</p></font>
+
+	<!-- Local Police Information -->
+
+        			<td>Local Police Name:</td>
+        			<td><input type="text" id="LPName" maxlength="30"/></td>
+
+        			<td>Local Police Emergency Number:</td>
+        			<td><input type="text" id="LPPhoneNumber" maxlength="10"/></td>
+
+        			<td>Local Police Full Adrdress:</td>
+        			<td><input type="text" id="LPAddres" maxlength="40"/></td> <br><br>
+
+        			<td>Local Police Description:</td>
+        			<td><input type="text" id="LPDesciription" maxlength="10"/></td>
+					
+					
+					<!-- Check Box information, This can be used later in development -->
+					<!--
+					<input type="checkbox" name="Box5" value="SAPE"> Sexaual Assult Police Examiners
+					<input type="checkbox" name="Box6" value="Station"> This is a great Station
+					<input type="checkbox" name="Box7" value="GO"> This Station has great officers
+					<input type="checkbox" name="Box8" value="OS"> This Station is open 24/7
+					-->
+					
+					<!-- <br><br><button onclick="myFunction()">Add Another</button> -->   <!-- "Add Another" Button, needs to be connected to json -->
+
+	<hr noshade>
+	<p><font size = 5>
+	On Campus Help Information:
+	</p></font>
+
+
+        			<td>On Campus Name:</td>
+        			<td><input type="text" id="OCName" maxlength="30"/></td>
+
+        			<td>On Campus Phone Number:</td>
+        			<td><input type="text" id="OCPhoneNumber" maxlength="10"/></td>
+
+        			<td>On Campus Full Adrdress:</td>
+        			<td><input type="text" id="OCAddres" maxlength="40"/></td>  <br><br>
+
+        			<td>On Campus Description:</td>
+        			<td><input type="text" id="OCDesciription" maxlength="10"/></td>
+					
+					<!-- Check Box information, This can be used later in development -->
+					<!--
+					<input type="checkbox" name="Box9" value="SACE"> Sexaual Assult Campus Examiners
+					<input type="checkbox" name="Box10" value="HelpCent"> This is a great Campus Help Center
+					<input type="checkbox" name="Box11" value="GHS"> This help center has great associatess
+					<input type="checkbox" name="Box12" value="OHS"> This help center is open 24/7
+					-->
+					
+					<!-- <br><br><button onclick="myFunction()">Add Another</button> -->   <!-- "Add Another" Button, needs to be connected to json -->
+
+	<hr noshade>
+	<p><font size = 5>
+	Local Counseling Information:
+	</p></font>
+
+				
+        			<td>Local Counseling Name:</td>
+        			<td><input type="text" id="LCName" maxlength="10"/></td>
+					<!-- Option 2 for adding more fields, bit more complicated but can be done using the sections below 
+					
+					<td class="field_wrapper"><input type="text" id="LCName" maxlength="30"/></td> 
+					<a href="javascript:void(0);" class="add_button" title="Add field">
+					<img src="sign-add-icon.png" width = "15" length ="15" /></a>
+					-->
+
+        			<td>Local Counseling Phone Number:</td>
+        			<td><input type="text" id="LCPhoneNumber" maxlength="10"/></td>
+
+        			<td>Local Counseling Full Adrdress:</td>
+        			<td><input type="text" id="LCAddres" maxlength="40"/></td> <br> <br>
+
+        			<td>Local Counseling Description:</td>
+        			 <td><input type="text" id="LCDesciription" maxlength="10"/></td>
+
+					<!-- Check Box information, This can be used later in development -->
+					<!--
+					<input type="checkbox" name="Box9" value="SACE"> Sexaual Assult Couseler
+					<input type="checkbox" name="Box10" value="HelpCent"> This is a great Couseling Center
+					<input type="checkbox" name="Box11" value="GHS"> This counsiling center has great associatess
+					<input type="checkbox" name="Box12" value="OHS"> This counsiling center is open 24/7				
+					-->
+					
+					
+	<br><br>
+
+	
+	
+
+	<hr noshade>
+	
+	<p><b> Please verify the information. Once complete click the submit button below </b> </p>
+	<tr>
+        			<td align="Left">
+    			<input type="button" value="Submit" onclick="SaveXMLData()"/></td>
+        			<td>
+    </tr>
+	
+	
+
+
+<!--	Extra Button Field (Option 2)
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+    var maxField = 10; //Input fields increment limitation
+    var addButton = $('.add_button'); //Add button selector
+    var wrapper = $('.field_wrapper'); //Input field wrapper
+    var fieldHTML = '<div><input type="text" name="field_name[]" value=""/><a href="javascript:void(0);" class="remove_button"><img src="remove-icon.png"/></a></div>'; //New input field html 
+    var x = 1; //Initial field counter is 1
+    
+    //Once add button is clicked
+    $(addButton).click(function(){
+        //Check maximum number of input fields
+        if(x < maxField){ 
+            x++; //Increment field counter
+            $(wrapper).append(fieldHTML); //Add field html
+        }
+    });
+    
+    //Once remove button is clicked
+    $(wrapper).on('click', '.remove_button', function(e){
+        e.preventDefault();
+        $(this).parent('div').remove(); //Remove field html
+        x--; //Decrement field counter
+    });
+});
+
+
+</script>
+-->
+
+
+	
+	</body>
+</html>

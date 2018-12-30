@@ -1,0 +1,16 @@
+The two files in this folder include: 
+
+Application Form Demo - This inlcudes a video of how to fillout the form via Internet Explorer 
+XML File Created - This displays the XML file created from the specific fields filled out in the form
+
+For the form online:
+ActiveX controls must be enabled in order for the XML file to be created;
+The verification protocol has only been called from the first two fields, Personal Information and Hospital information...
+This was done in order to test and demo without constact error messages popping up. Easily can call the validation function...
+Within the rest of the Form. Code has comments on how to do this. 
+
+For the XML File:
+The XML file is created after someone clicks sumbit on the form. It will then organize each box filled out with the corresponding...
+tag. For example LHN is equivelent to local hospital name. LHPN is equivelent to local hospital phone number and so on...
+This can then be used on the application side to extract the infromation and easily add it to the app. This is future work to be done. 
+
